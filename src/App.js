@@ -10,10 +10,14 @@ function App() {
     setUsers((prevUsers) => [user, ...prevUsers]);
   }
 
+  function deleteUserHandler(userId) {
+    setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+  }
+
   return (
     <div className="App">
       <AddUser onAddUser={addUserHandler} />
-      <UsersList users={users} />
+      <UsersList users={users} onDeleteUser={deleteUserHandler} />
     </div>
   );
 }

@@ -17,8 +17,8 @@ function AddUser(props) {
     if (enteredUserName.trim().length === 0) {
       setIsNameValid(false);
       setError({
-        title: "올바른 값을 입력하세요",
-        message: "알맞은 Username을 입력해 주세요",
+        title: "올바른 이름을 입력하세요",
+        message: "공백을 제외하고 한 글자 이상을 입력해야 합니다.",
       });
       return;
     }
@@ -26,12 +26,13 @@ function AddUser(props) {
     if (enteredUserAge.trim().length === 0 || +enteredUserAge < 1) {
       setIsAgeValid(false);
       setError({
-        title: "올바른 값을 입력하세요",
-        message: "알맞은 Age를 입력해 주세요",
+        title: "올바른 나이를 입력하세요",
+        message: "나이는 1 이상의 숫자만 입력할 수 있습니다.",
       });
       return;
     }
     props.onAddUser({
+      id: Math.random().toString(),
       name: enteredUserName,
       age: enteredUserAge,
     });

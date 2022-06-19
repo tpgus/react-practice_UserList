@@ -6,7 +6,7 @@ function UsersList(props) {
     <Card className={styles.users}>
       <ul>
         {props.users.map((user) => (
-          <li key={Math.random().toString()}>
+          <li key={user.id} onClick={() => props.onDeleteUser(user.id)}>
             {user.name} ({user.age} years old)
           </li>
         ))}
