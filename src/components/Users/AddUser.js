@@ -1,20 +1,22 @@
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import styles from "./AddUser.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ErrorModal from "../UI/ErrorModal";
 
 function AddUser(props) {
-  const [enteredUserName, setEnteredUserName] = useState("");
-  const [enteredUserAge, setEnteredUserAge] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
   const [isNameValid, setIsNameValid] = useState(true);
   const [isAgeValid, setIsAgeValid] = useState(true);
   const [error, setError] = useState();
 
   function submitHandler(e) {
     e.preventDefault();
+    const enteredName = nameInputRef.current.value;
+    const eneteredAge = ageInputRef.current.value;
 
-    if (enteredUserName.trim().length === 0) {
+    if (enteredName.trim().length === 0) {
       setIsNameValid(false);
       setError({
         title: "올바른 이름을 입력하세요",
@@ -23,7 +25,7 @@ function AddUser(props) {
       return;
     }
 
-    if (enteredUserAge.trim().length === 0 || +enteredUserAge < 1) {
+    if (eneteredAge.trim().length === 0 || +eneteredAge < 1) {
       setIsAgeValid(false);
       setError({
         title: "올바른 나이를 입력하세요",
@@ -33,25 +35,11 @@ function AddUser(props) {
     }
     props.onAddUser({
       id: Math.random().toString(),
-      name: enteredUserName,
-      age: enteredUserAge,
+      name: enteredName,
+      age: eneteredAge,
     });
-    setEnteredUserAge("");
-    setEnteredUserName("");
-  }
-
-  function userNameHandler(e) {
-    if (e.target.value.trim().length > 0) {
-      setIsNameValid(true);
-    }
-    setEnteredUserName(e.target.value);
-  }
-
-  function userAgeHandler(e) {
-    if (e.target.value.trim().length > 0 && +e.target.value.trim() > 0) {
-      setIsAgeValid(true);
-    }
-    setEnteredUserAge(e.target.value);
+    nameInputRef.current.value = "";
+    ageInputRef.current.value = "";
   }
 
   function closeModalHandler() {
@@ -59,7 +47,7 @@ function AddUser(props) {
   }
 
   return (
-    <div>
+    <>
       {error && (
         <ErrorModal
           title={error.title}
@@ -74,21 +62,19 @@ function AddUser(props) {
             id="username"
             className={`username ${!isNameValid && styles.invalid}`}
             type="text"
-            value={enteredUserName}
-            onChange={userNameHandler}
+            ref={nameInputRef}
           ></input>
           <label htmlFor="age">Age (Years)</label>
           <input
             id="age"
             className={`userage ${!isAgeValid && styles.invalid}`}
             type="number"
-            value={enteredUserAge}
-            onChange={userAgeHandler}
+            ref={ageInputRef}
           ></input>
           <Button type="submit">추가</Button>
         </form>
       </Card>
-    </div>
+    </>
   );
 }
 
