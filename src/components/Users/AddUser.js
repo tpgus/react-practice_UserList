@@ -3,6 +3,7 @@ import Button from "../UI/Button";
 import styles from "./AddUser.module.css";
 import { useState, useRef } from "react";
 import ErrorModal from "../UI/ErrorModal";
+import Wrapper from "../Helpers/Wrapper";
 
 function AddUser(props) {
   const nameInputRef = useRef();
@@ -47,7 +48,8 @@ function AddUser(props) {
   }
 
   return (
-    <>
+    //Fragment , <> 와 같은 역할을 하는 Wrapper 컴포넌트
+    <Wrapper>
       {error && (
         <ErrorModal
           title={error.title}
@@ -74,7 +76,7 @@ function AddUser(props) {
           <Button type="submit">추가</Button>
         </form>
       </Card>
-    </>
+    </Wrapper>
   );
 }
 
