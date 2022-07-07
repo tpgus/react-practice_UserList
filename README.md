@@ -15,7 +15,7 @@
  
 - 사용자 입력에 대한 유효성 검사
 
-- 2022.06.22 추가 : 프래그먼트와 Ref를 사용한 코드 리팩토링
+- [타입스크립트로 리팩토링한 UserList 프로젝트](https://github.com/tpgus/typescript_react/tree/main/user-list)
 
 
 ![ezgif com-gif-maker (7)](https://user-images.githubusercontent.com/43470398/174497683-92edf5fc-24b4-47f4-a1cf-fe4b6d93bdf9.gif)
